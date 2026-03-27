@@ -15,6 +15,8 @@ Personal dotfiles for Fedora / KDE Plasma, managed with [GNU Stow](https://www.g
 | `ripgrep` | `~/.config/ripgrep/ripgreprc` defaults |
 | `fd` | `~/.fdignore` global ignores |
 | `keyd` | Keyboard remapping (`/etc/keyd/default.conf`) |
+| `scripts` | `switch-theme` — syncs dark/light across all apps |
+| `systemd` | `theme-watcher.service` — auto-syncs on KDE theme change |
 
 ---
 
@@ -50,10 +52,14 @@ cd ~/.dotfiles
 
 ```bash
 # User configs (symlinked into ~/)
-stow fish tmux kitty starship git ripgrep fd nvim
+stow fish tmux kitty starship git ripgrep fd nvim ssh scripts systemd
 
 # Keyboard remapping (symlinked into /etc/)
 sudo stow -t /etc keyd
+
+# Seed runtime theme symlinks (default: dark)
+ln -sf ~/.config/kitty/themes/mocha.conf ~/.config/kitty/current-theme.conf
+ln -sf ~/.config/tmux/themes/mocha.conf  ~/.config/tmux/theme.conf
 ```
 
 ### 4. Post-install steps
