@@ -4,6 +4,10 @@ end
 
 fish_add_path ~/.local/bin
 
+# Default editor
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+
 # ripgrep config
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgreprc
 
@@ -14,6 +18,9 @@ if status is-interactive
     # Attach to existing "main" session or create it
     tmux new-session -A -s main
 end
+
+# zoxide (smarter cd — use 'z' instead of 'cd')
+zoxide init fish | source
 
 # Starship prompt
 starship init fish | source
