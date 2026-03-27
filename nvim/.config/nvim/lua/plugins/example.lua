@@ -1,1 +1,2 @@
--- Add your custom plugins here\nreturn {}
+-- Add your custom plugins here
+return {}
