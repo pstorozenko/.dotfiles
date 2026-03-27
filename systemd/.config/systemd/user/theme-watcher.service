@@ -1,0 +1,19 @@
+[Unit]
+Description=Sync terminal theme when KDE switches dark/light mode
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bash -c '\
+    dbus-monitor --session \
+        "type=signal,interface=org.freedesktop.portal.Settings,member=SettingChanged" \
+    | grep --line-buffered "color-scheme" \
+    | while IFS= read -r _line; do \
+        sleep 0.5; \
+        /home/pitrosk/.local/bin/switch-theme; \
+    done'
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

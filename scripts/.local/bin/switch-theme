@@ -1,0 +1,59 @@
+#!/usr/bin/bash
+# switch-theme [dark|light]
+# Syncs kitty, tmux, neovim, and KDE to the given theme.
+# If no argument given, reads current mode from xdg-desktop-portal.
+
+set -euo pipefail
+
+# --- Determine mode ---
+MODE="${1:-}"
+
+if [[ -z "$MODE" ]]; then
+    PORTAL=$(gdbus call --session \
+        --dest org.freedesktop.portal.Desktop \
+        --object-path /org/freedesktop/portal/desktop \
+        --method org.freedesktop.portal.Settings.Read \
+        org.freedesktop.appearance color-scheme 2>/dev/null || echo "")
+    if echo "$PORTAL" | grep -q "uint32 1"; then
+        MODE="dark"
+    else
+        MODE="light"
+    fi
+fi
+
+echo "$MODE" > ~/.config/theme-mode
+
+if [[ "$MODE" == "dark" ]]; then
+    KITTY_THEME=~/.config/kitty/themes/mocha.conf
+    TMUX_THEME=~/.config/tmux/themes/mocha.conf
+    KDE_SCHEME=CatppuccinMochaBlue
+    KVANTUM_THEME=catppuccin-mocha-blue
+    NVIM_BG=dark
+else
+    KITTY_THEME=~/.config/kitty/themes/latte.conf
+    TMUX_THEME=~/.config/tmux/themes/latte.conf
+    KDE_SCHEME=CatppuccinLatteBlue
+    KVANTUM_THEME=catppuccin-latte-blue
+    NVIM_BG=light
+fi
+
+# --- Kitty: update symlink and reload all instances ---
+ln -sf "$KITTY_THEME" ~/.config/kitty/current-theme.conf
+pkill -SIGUSR1 kitty 2>/dev/null || true
+
+# --- Tmux: update symlink and reload all sessions ---
+ln -sf "$TMUX_THEME" ~/.config/tmux/theme.conf
+tmux source-file ~/.config/tmux/theme.conf 2>/dev/null || true
+
+# --- Neovim: switch background in all running instances ---
+for sock in /run/user/$(id -u)/nvim.*.0 /tmp/nvim.*.0 2>/dev/null; do
+    [[ -S "$sock" ]] && nvim --server "$sock" \
+        --remote-expr "execute('set background=$NVIM_BG')" \
+        >/dev/null 2>&1 || true
+done
+
+# --- KDE: color scheme + Kvantum ---
+plasma-apply-colorscheme "$KDE_SCHEME" 2>/dev/null || true
+kvantummanager --set "$KVANTUM_THEME" 2>/dev/null || true
+dbus-send --session --type=signal /KGlobalSettings \
+    org.kde.KGlobalSettings.notifyChange int32:4 int32:0 2>/dev/null || true
