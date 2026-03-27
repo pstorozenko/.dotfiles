@@ -19,3 +19,7 @@ set -gx FZF_DEFAULT_OPTS "\
 
 # fzf.fish: use fd for directory and file searches
 set -gx fzf_fd_opts '--hidden --follow --exclude .git'
+
+# Move variable search off Ctrl+V → Ctrl+Alt+V, restore Ctrl+V as paste
+fzf_configure_bindings --variables=\e\cv
+bind \cv fish_clipboard_paste
