@@ -1,0 +1,15 @@
+.git
+node_modules
+__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.venv
+venv
+.env
+*.pyc
+dist
+build
+.next
+.nuxt
+target

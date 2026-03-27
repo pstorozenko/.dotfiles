@@ -1,0 +1,26 @@
+# Case-insensitive if pattern is all lowercase, sensitive if any uppercase
+--smart-case
+
+# Search hidden files/dirs (but not .git)
+--hidden
+--glob=!.git
+
+# Show line numbers
+--line-number
+
+# Follow symlinks
+--follow
+
+# Global ignores
+--glob=!node_modules
+--glob=!__pycache__
+--glob=!.pytest_cache
+--glob=!.mypy_cache
+--glob=!.ruff_cache
+--glob=!.venv
+--glob=!venv
+--glob=!dist
+--glob=!build
+--glob=!.next
+--glob=!target
+--glob=!*.pyc

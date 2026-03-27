@@ -1,0 +1,5 @@
+# Fish private variables (machine-specific runtime state)
+fish/.config/fish/fish_variables
+
+# Neovim lazy.nvim internal git dir (not a real submodule)
+nvim/.config/nvim/.git
