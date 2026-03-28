@@ -54,6 +54,6 @@ done
 
 # --- KDE: color scheme + Kvantum ---
 plasma-apply-colorscheme "$KDE_SCHEME" 2>/dev/null || true
-kvantummanager --set "$KVANTUM_THEME" 2>/dev/null || true
+sed -i "s/^theme=.*/theme=$KVANTUM_THEME/" ~/.config/Kvantum/kvantum.kvconfig
 dbus-send --session --type=signal /KGlobalSettings \
     org.kde.KGlobalSettings.notifyChange int32:4 int32:0 2>/dev/null || true
