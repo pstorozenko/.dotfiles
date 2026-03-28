@@ -46,7 +46,7 @@ ln -sf "$TMUX_THEME" ~/.config/tmux/theme.conf
 tmux source-file ~/.config/tmux/theme.conf 2>/dev/null || true
 
 # --- Neovim: switch background in all running instances ---
-for sock in /run/user/$(id -u)/nvim.*.0 /tmp/nvim.*.0 2>/dev/null; do
+for sock in /run/user/$(id -u)/nvim.*.0 /tmp/nvim.*.0; do
     [[ -S "$sock" ]] && nvim --server "$sock" \
         --remote-expr "execute('set background=$NVIM_BG')" \
         >/dev/null 2>&1 || true
