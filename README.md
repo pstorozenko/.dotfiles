@@ -1,22 +1,41 @@
 # dotfiles
 
+> [!NOTE]
+> This setup was mostly generated with Claude Code so it won't be bullet proof.
+> In particular the theme switching feature is still in progress.
+
 Personal dotfiles for Fedora / KDE Plasma, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Packages
 
-| Package | What it configures |
-|---|---|
-| `fish` | Shell config, functions, fzf/uv/nvm hooks |
-| `tmux` | tmux config (Catppuccin theme, resurrect/continuum) |
-| `kitty` | Terminal emulator (Catppuccin theme, JetBrainsMono NF) |
-| `starship` | Shell prompt |
-| `git` | Global git config (delta pager, aliases) |
-| `nvim` | LazyVim config (Python, TS, JSON, prettier extras) |
-| `ripgrep` | `~/.config/ripgrep/ripgreprc` defaults |
-| `fd` | `~/.fdignore` global ignores |
-| `keyd` | Keyboard remapping (`/etc/keyd/default.conf`) |
-| `scripts` | `switch-theme` — syncs dark/light across all apps |
-| `systemd` | `theme-watcher.service` — auto-syncs on KDE theme change |
+| Package    | What it configures                                       |
+| ---------- | -------------------------------------------------------- |
+| `fish`     | Shell config, functions, fzf/uv/nvm hooks                |
+| `tmux`     | tmux config (Catppuccin theme, copycat, yank)            |
+| `kitty`    | Terminal emulator (Catppuccin theme, JetBrainsMono NF)   |
+| `starship` | Shell prompt                                             |
+| `git`      | Global git config (delta pager, aliases)                 |
+| `nvim`     | LazyVim config (Python, TS, JSON, prettier extras)       |
+| `ripgrep`  | `~/.config/ripgrep/ripgreprc` defaults                   |
+| `fd`       | `~/.fdignore` global ignores                             |
+| `keyd`     | Keyboard remapping (`/etc/keyd/default.conf`)            |
+| `scripts`  | `switch-theme` — syncs dark/light across all apps        |
+| `systemd`  | `theme-watcher.service` — auto-syncs on KDE theme change |
+
+---
+
+## Useful CLI tools
+
+| Tool        | What it does                                      |
+| ----------- | ------------------------------------------------- |
+| `yazi`      | Terminal file manager with image preview          |
+| `btop`      | Resource monitor (CPU, mem, net, disk)            |
+| `lazygit`   | TUI for git — stage, commit, rebase interactively |
+| `bat`       | `cat` with syntax highlighting and git integration|
+| `eza`       | `ls` replacement with colors, icons, tree view    |
+| `fzf`       | General-purpose fuzzy finder                      |
+| `zoxide`    | Smarter `cd` — jumps to frecent directories       |
+| `jq`        | JSON processor for the command line               |
 
 ---
 
@@ -88,18 +107,6 @@ gh config set editor nvim
 sudo systemctl enable --now keyd
 ```
 
-### 5. KDE (manual)
-
-These are set via System Settings and don't have clean config files to stow:
-
-- **Default terminal** → System Settings → Apps → Default Applications → Terminal → kitty
-- **Tap-to-click** → System Settings → Input → Touchpad → Tap to Click
-- **Night Color** → System Settings → Display → Night Color → Auto schedule
-- **Window tiling** → Install [Krohnkite](https://github.com/anametologin/krohnkite) KWin script
-- **Workspace shortcuts** → System Settings → Shortcuts → KWin:
-  - `Meta+1/2/3/4` → Switch to Desktop 1/2/3/4
-  - `Meta+Left/Right` → Switch One Desktop Left/Right
-
 ---
 
 ## Day-to-day
@@ -122,24 +129,22 @@ cd ~/.dotfiles && stow -D some-package
 
 ## keyd shortcuts
 
-| Key | Action |
-|---|---|
-| `CapsLock` (hold) | `Ctrl` |
-| `CapsLock` (tap) | `Esc` |
-| `RightAlt` + `h/j/k/l` | ←↓↑→ arrow keys |
-| `RightAlt` + `u/p` | Home / End |
-| `RightAlt` + `i/o` | Page Up / Page Down |
-| `RightAlt` + `Backspace` | Delete |
+| Key                      | Action              |
+| ------------------------ | ------------------- |
+| `CapsLock` (hold)        | `Ctrl`              |
+| `CapsLock` (tap)         | `Esc`               |
+| `RightAlt` + `h/j/k/l`   | ←↓↑→ arrow keys     |
+| `RightAlt` + `u/p`       | Home / End          |
+| `RightAlt` + `i/o`       | Page Up / Page Down |
+| `RightAlt` + `Backspace` | Delete              |
 
 ## tmux shortcuts
 
-Prefix: `Ctrl+a`
+Prefix: `Ctrl+a` or `Alt+a`
 
-| Keys | Action |
-|---|---|
-| `prefix + \|` | Split horizontal |
-| `prefix + -` | Split vertical |
-| `prefix + h/j/k/l` | Navigate panes |
-| `prefix + Ctrl+s` | Save session |
-| `prefix + Ctrl+r` | Restore session |
-| `prefix + r` | Reload config |
+| Keys               | Action           |
+| ------------------ | ---------------- |
+| `prefix + \|`      | Split horizontal |
+| `prefix + -`       | Split vertical   |
+| `prefix + h/j/k/l` | Navigate panes   |
+| `prefix + r`       | Reload config    |
