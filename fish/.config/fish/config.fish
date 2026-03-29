@@ -15,6 +15,7 @@ set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgreprc
 if status is-interactive
     and not set -q TMUX
     and not set -q SSH_TTY
+    and test "$TERM_PROGRAM" != vscode
     # Attach to existing "main" session or create it
     tmux new-session -A -s main
 end
