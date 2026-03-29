@@ -63,7 +63,7 @@ fc-cache -fv
 ### 2. Clone
 
 ```bash
-git clone git@github.com:pitrosk/dotfiles.git ~/.dotfiles
+git clone git@github.com:pstorozenko/.dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 ```
 
