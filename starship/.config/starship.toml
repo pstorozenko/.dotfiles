@@ -18,7 +18,7 @@ truncation_length = 4
 truncate_to_repo = true
 
 [git_branch]
-symbol = " "
+symbol = " "
 style = "bold purple"
 format = "on [$symbol$branch]($style) "
 
@@ -34,13 +34,13 @@ staged = "+${count}"
 stashed = ""
 
 [python]
-symbol = " "
+symbol = " "
 format = 'via [$symbol($version )(\($virtualenv\) )]($style)'
 style = "yellow"
 detect_files = ["pyproject.toml", "requirements.txt", ".python-version", "*.py"]
 
 [nodejs]
-symbol = " "
+symbol = " "
 format = "via [$symbol($version )]($style)"
 style = "green"
 detect_files = ["package.json", ".nvmrc"]
